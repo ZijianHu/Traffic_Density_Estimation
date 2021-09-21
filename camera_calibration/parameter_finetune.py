@@ -21,7 +21,7 @@ class ParameterFinetune(BaseModel):
             vmm_results = json.load(f)
         return vmm_results
 
-    def get_back_projected_loss(self, object_points, back_projected_points, rvec, tvec, f):
+    def get_back_projected_loss(self, object_points, back_projected_points):
         pairs = combinations(range(len(object_points)), 2)
         distance_loss = 0
         angle_loss = 0
@@ -31,7 +31,6 @@ class ParameterFinetune(BaseModel):
             length_object = np.linalg.norm(object_vec)
             length_back_projected = np.linalg.norm(back_projected_vec)
             cos_theta = np.dot(object_vec, back_projected_vec.T) / (length_object * length_back_projected)
-
             distance_loss += np.square(length_object - length_back_projected)
             angle_loss += np.sqrt(1 - min(np.square(cos_theta), 1))
         pair_num = len(object_points) * (len(object_points) - 1) / 2
@@ -43,12 +42,11 @@ class ParameterFinetune(BaseModel):
         for i, (object_points, image_points) in enumerate(zip(self.object_points_full, self.image_points_full)):
             back_projected_points = []
             for object_point, image_point in zip(object_points, image_points):
-                X_hat, Y_hat = self.get_back_projected_point(object_point, rvec, tvec, f, object_point[-1])
+                X_hat, Y_hat = self.get_back_projected_point(image_point, rvec, tvec, f, object_point[-1])
                 back_projected_points.append([X_hat, Y_hat, object_point[-1]])
             back_projected_points = np.array(back_projected_points)
 
-            losses.append(self.get_back_projected_loss(object_points, back_projected_points,
-                                                       rvec, tvec, f))
+            losses.append(self.get_back_projected_loss(object_points, back_projected_points))
             back_projected_centriods.append(np.mean(back_projected_points, axis=0))
 
         fix_centriod = np.reshape(np.mean(fixed_object_points, axis=0), [1, 3])

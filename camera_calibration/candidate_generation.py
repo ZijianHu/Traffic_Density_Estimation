@@ -2,7 +2,7 @@ import os
 import json
 import numpy as np
 from cv2 import cv2
-from .base_model import BaseModel
+from base_model import BaseModel
 from itertools import combinations
 from camera_calibration.util_files.io import load_image_points, load_object_points
 
@@ -60,7 +60,7 @@ class CandidateGeneration(BaseModel):
                 temp_res[key]["rvec"] = rvec.tolist()
                 temp_res[key]["tvec"] = tvec.tolist()
                 temp_res[key]["f"] = self.focal_length
-                temp_res[key]["loss"] = loss
+                temp_res[key]["loss"] = loss.tolist()
             res[i] = temp_res
 
         self.create_montage(images, os.path.join(self.save_dir, "cg_montage.jpg"), model_num, vehicle_num)

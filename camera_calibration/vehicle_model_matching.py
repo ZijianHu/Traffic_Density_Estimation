@@ -120,7 +120,7 @@ if __name__ == "__main__":
     config["image_height"] = 240
     config["image_width"] = 320
     config["focal_length"] = 350
-    config["alpha"] = 1
+    config["alpha"] = 6
     config["temperature"] = 0
     config["budget_1"] = 2000
     config["budget_2"] = 4000
