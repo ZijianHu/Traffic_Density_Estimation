@@ -91,6 +91,12 @@ class VehicleModelMatching(BaseModel):
                     best_tvec = tvec_new
                     best_f = f_new
 
+                if self.verbose:
+                    print("Before optimizing:")
+                    print("\t Vehicle %02d, vehicle model %s, projection loss %f" % (i, key, loss_old))
+                    print("After optimizing:")
+                    print("\t Vehicle %02d, vehicle model %s, projection loss %f" % (i, key, loss_new))
+
             if self.verbose:
                 print("Before vehicle model matching:")
                 print("\t Vehicle %02d, vehicle model %s, projection loss %f" % (i, best_old_model, loss_old_min))
@@ -102,8 +108,8 @@ class VehicleModelMatching(BaseModel):
             res[i]["rvec"] = best_rvec.tolist()
             res[i]["tvec"] = best_tvec.tolist()
             res[i]["f"] = best_f
-            res[i]["loss"] = loss_old_min.tolist()
-
+            res[i]["loss"] = loss_new_min.tolist()
+            res[i]["model"] = best_new_model
         self.create_montage(images, os.path.join(self.save_dir, "vmm_montage.jpg"), 1, vehicle_num)
         with open(os.path.join(self.save_dir, "vmm_results.json"), "w") as f:
             json.dump(res, f)
@@ -129,7 +135,3 @@ if __name__ == "__main__":
     config["verbose"] = True
     cg = VehicleModelMatching(config)
     cg.run()
-
-    # print("Final time cost is: {} seconds".format(run_time))
-    # print("Final time cost is: {} minutes".format(run_time / 60))
-    # print("Final time cost is: {} hours".format(run_time / 3600))

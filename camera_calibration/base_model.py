@@ -53,7 +53,7 @@ class BaseModel(object):
         projected_points = cv2.projectPoints(object_points, rvec, tvec, self.intrinsic_matrix, self.discoeffs)[0][:, 0, :]
         return np.mean(np.linalg.norm(projected_points - image_points, axis=1))
 
-    def get_back_projected_point(self, image_point, rvec, tvec, f):
+    def get_back_projected_point(self, image_point, rvec, tvec, f, Z=0):
         rmat = cv2.Rodrigues(rvec)[0]
         u = (image_point[0] - self.image_width // 2) / f
         v = (image_point[1] - self.image_height // 2) / f
@@ -62,8 +62,8 @@ class BaseModel(object):
         coeffcient_y_1 = rmat[0, 1] - u * rmat[2, 1]
         coeffcient_y_2 = rmat[1, 1] - v * rmat[2, 1]
 
-        coeffcient_c_1 = 0 - (tvec[0, 0] - u * tvec[2, 0])
-        coeffcient_c_2 = 0 - (tvec[1, 0] - v * tvec[2, 0])
+        coeffcient_c_1 = 0 - ((tvec[0, 0] - u * tvec[2, 0]) + (rmat[0, 2] - u * rmat[2, 2]) * Z)
+        coeffcient_c_2 = 0 - ((tvec[1, 0] - v * tvec[2, 0]) + (rmat[1, 2] - v * rmat[2, 2]) * Z)
         A = np.array([[coeffcient_x_1, coeffcient_y_1], [coeffcient_x_2, coeffcient_y_2]])
         b = np.array([[coeffcient_c_1], [coeffcient_c_2]])
         retval = np.linalg.solve(A, b)
