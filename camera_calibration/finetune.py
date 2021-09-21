@@ -175,7 +175,7 @@ if __name__ == "__main__":
     config["alpha"] = 1
     config["temperature"] = 0
     config["budget_1"] = 2000
-    config["budget_2"] = 4000
+    config["budget_2"] = 20000
     config["use_ransac"] = False
     config["opt_name"] = "CMA"
 
