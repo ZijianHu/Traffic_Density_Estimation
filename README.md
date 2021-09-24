@@ -63,3 +63,11 @@ There are also some hyperparameters to set. You can look into the camera_calibra
 
 
 ### Vehicle detection
+#### Step 1: Clone the YOLO-v5 repo
+You can clone the YOLO-v5 repo [here](https://github.com/ultralytics/yolov5.git).
+
+#### Step 2: Download the weight files
+The pretrained weight files for the vehicle detection model can be downloaded from Google Drive, links are shown [here](vehicle_detection/download_weights.txt).
+
+#### Step 3: Detect vehicles
+Once cloned the repo and downloaded the weight files, you can use yolo-v5 to detect vehicles from your own dataset.
