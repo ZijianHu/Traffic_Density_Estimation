@@ -71,3 +71,6 @@ The pretrained weight files for the vehicle detection model can be downloaded fr
 
 #### Step 3: Detect vehicles
 Once cloned the repo and downloaded the weight files, you can use yolo-v5 to detect vehicles from your own dataset.
+
+##
+Please contact Zijian Hu (zijian.hu@connect.polyu.hk) if you got any questions.
