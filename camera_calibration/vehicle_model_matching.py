@@ -1,7 +1,8 @@
 import os
 import json
 import numpy as np
-from cv2 import cv2
+# from cv2 import cv2
+import cv2
 import nevergrad as ng
 from base_model import BaseModel
 from concurrent import futures

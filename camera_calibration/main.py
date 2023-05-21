@@ -13,7 +13,7 @@ parser.add_argument("--temperature", type=int, default=0)
 parser.add_argument("--budget_1", type=int, default=2000)
 parser.add_argument("--budget_2", type=int, default=20000)
 parser.add_argument("--use_ransac", type=bool, default=False)
-parser.add_argument("--opt_name", type=int, default="CMA")
+parser.add_argument("--opt_name", type=str, default="CMA")
 parser.add_argument("--verbose", type=bool, default=False)
 
 parser.add_argument("--object_points_path", type=str, default="../examples/camera_calibration/K109F/objects/vehicle_3dkeypoints_head.json")

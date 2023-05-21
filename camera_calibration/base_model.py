@@ -1,6 +1,7 @@
 import os
 import numpy as np
-from cv2 import cv2
+# from cv2 import cv2
+import cv2
 from camera_calibration.util_files.io import load_image
 
 class BaseModel(object):

@@ -22,13 +22,18 @@ if not vidcap.isOpened():
 
 def write_frames(vidcap):
     count = 0
+    pre_pos_count = -1
     while vidcap.isOpened():
         # vidcap.set(cv2.CAP_PROP_POS_MSEC, sec * 1000)
         hasFrames,image = vidcap.read()
         if hasFrames:
-
             savepath = os.path.join(output_name, "image_%05d.jpg" % count)
             cv2.imwrite(savepath, image)     # save frame as JPG file
         count += 1
+
+        cur_frame = vidcap.get(cv2.CAP_PROP_POS_FRAMES)
+        end_frame = vidcap.get(cv2.CAP_PROP_FRAME_COUNT)
+        if cur_frame == end_frame:
+            break
 
 write_frames(vidcap)

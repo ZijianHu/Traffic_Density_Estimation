@@ -1,5 +1,6 @@
 import numpy as np
-from cv2 import cv2
+# from cv2 import cv2
+import cv2
 
 
 def generate_polygon_mask(points, fill=True):

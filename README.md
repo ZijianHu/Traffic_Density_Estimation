@@ -74,3 +74,6 @@ Once cloned the repo and downloaded the weight files, you can use yolo-v5 to det
 
 ##
 Please contact Zijian Hu (zijian.hu@connect.polyu.hk) if you got any questions.
+
+###
+Tracking github address: https://github.com/mikel-brostrom/yolov8_tracking

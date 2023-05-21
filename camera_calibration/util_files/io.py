@@ -3,7 +3,8 @@ import shutil
 import json
 import numpy as np
 import pandas as pd
-from cv2 import cv2
+# from cv2 import cv2
+import cv2
 import xml.etree.ElementTree as ET
 
 def load_image(path):
